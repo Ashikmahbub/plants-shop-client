@@ -1,0 +1,16 @@
+import React from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
+const Main = () => {
+    return (
+        <div>
+            <Header></Header>
+            <main></main>
+            <Footer></Footer>
+            
+        </div>
+    );
+};
+
+export default Main;
