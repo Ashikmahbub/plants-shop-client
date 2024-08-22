@@ -1,6 +1,8 @@
  
 import Banner from "../Banner/Banner";
-import Catagory from "../Categories/Categories";
+import Indoor from "../Categories/Indoors";
+import SemiIndoor from "../Categories/Semi-Indoors";
+ 
 
 const Home = () => {
    
@@ -9,7 +11,9 @@ const Home = () => {
   return (
     <div>
        <Banner></Banner>
-       <Catagory></Catagory>
+       <Indoor></Indoor>
+       <SemiIndoor></SemiIndoor>
+
 
     </div>
    

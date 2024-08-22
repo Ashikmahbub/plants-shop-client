@@ -1,41 +1,59 @@
- 
- 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import img1  from '../../assets/home/01.jpg'
-import img2  from '../../assets/home/02.jpg'
-import img3  from '../../assets/home/03.jpg'
-import img4  from '../../assets/home/04.jpg'
-import img5  from '../../assets/home/05.jpg'
-import img6  from '../../assets/home/06.jpg'
+import img1 from "../../assets/home/01.jpg";
+import img2 from "../../assets/home/02.jpg";
+import img3 from "../../assets/home/03.jpg";
+import img4 from "../../assets/home/04.jpg";
+import img5 from "../../assets/home/05.jpg";
+import img6 from "../../assets/home/06.jpg";
 
 const Banner = () => {
   return (
-    <div className="text-center">
-      <Carousel>
-        <div>
-          <img src={img1} />
-          
+    <div className="relative">
+      <Carousel
+        autoPlay
+        infiniteLoop
+        showThumbs={false}
+        showStatus={false}
+        interval={3000}
+        transitionTime={800}
+        className="carousel-container"
+      >
+        <div className="relative h-[500px] md:h-[600px] lg:h-[700px]">
+          <img src={img1} className="w-full h-full object-cover" alt="Banner 1" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent flex items-end p-8">
+            <h2 className="text-white text-3xl md:text-5xl font-bold">Welcome to Our Plant Shop</h2>
+          </div>
         </div>
-        <div>
-          <img src={img2} />
-           
+        <div className="relative h-[500px] md:h-[600px] lg:h-[700px]">
+          <img src={img2} className="w-full h-full object-cover" alt="Banner 2" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent flex items-end p-8">
+            <h2 className="text-white text-3xl md:text-5xl font-bold">Bring Nature into Your Home</h2>
+          </div>
         </div>
-        <div>
-          <img src={img3} />
-           
+        <div className="relative h-[500px] md:h-[600px] lg:h-[700px]">
+          <img src={img3} className="w-full h-full object-cover" alt="Banner 3" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent flex items-end p-8">
+            <h2 className="text-white text-3xl md:text-5xl font-bold">Indoor & Outdoor Plants</h2>
+          </div>
         </div>
-        <div>
-          <img src={img4} />
-          
+        <div className="relative h-[500px] md:h-[600px] lg:h-[700px]">
+          <img src={img4} className="w-full h-full object-cover" alt="Banner 4" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent flex items-end p-8">
+            <h2 className="text-white text-3xl md:text-5xl font-bold">Brighten Your Space with Greenery</h2>
+          </div>
         </div>
-        <div>
-          <img src={img5} />
-           
+        <div className="relative h-[500px] md:h-[600px] lg:h-[700px]">
+          <img src={img5} className="w-full h-full object-cover" alt="Banner 5" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent flex items-end p-8">
+            <h2 className="text-white text-3xl md:text-5xl font-bold">Explore Our Plant Collection</h2>
+          </div>
         </div>
-        <div>
-          <img src={img6} />
-           
+        <div className="relative h-[500px] md:h-[600px] lg:h-[700px]">
+          <img src={img6} className="w-full h-full object-cover" alt="Banner 6" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent flex items-end p-8">
+            <h2 className="text-white text-3xl md:text-5xl font-bold">Plants for Every Environment</h2>
+          </div>
         </div>
       </Carousel>
     </div>
