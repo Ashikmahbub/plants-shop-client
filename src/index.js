@@ -1,13 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router/Router";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import "./index.css";
+
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <div className="max-w-screen-xl mx-auto bg-white">
+      <RouterProvider router={router} />
+    </div>
   </React.StrictMode>
 );
 
