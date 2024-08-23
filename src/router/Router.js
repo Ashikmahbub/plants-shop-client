@@ -5,8 +5,14 @@ import Main from "../layout/Main";
 import User from '../pages/AdminDashboard/User';
 import Categories from "../pages/Categories/Indoors";
 import Dashboard from "../pages/AdminDashboard/Dashboard";
-import Products from "../pages/AdminDashboard/Products";
+
 import Shop from "../pages/Shop/Shop";
+import Indoor from "../pages/Indoor/Indoor";
+import AddProduct from "../pages/AdminDashboard/AddProduct";
+import ManageProducts from "../pages/AdminDashboard/ManageProducts";
+import Cart from "../pages/Cart/Cart";
+import Checkout from "../pages/Checkout/Checkout";
+import ThankYou from "../pages/Thankyou/ThankYou";
 
 export const router = createBrowserRouter(
     [
@@ -29,8 +35,8 @@ export const router = createBrowserRouter(
                     element:<Dashboard></Dashboard>
                 },
                 {
-                    path:'products',
-                    element:<Products></Products>
+                    path:'addproducts',
+                    element:<AddProduct></AddProduct>
                 },
                 {
                     path:'users',
@@ -39,6 +45,26 @@ export const router = createBrowserRouter(
                 {
                     path:'shop',
                     element:<Shop></Shop>
+                },
+                {
+                    path:'indoors',
+                    element:<Indoor></Indoor>
+                },
+                {
+                    path:'products',
+                    element:<ManageProducts></ManageProducts>
+                },
+                {
+                    path:'cart',
+                    element:<Cart></Cart>
+                },
+                {
+                    path:'checkout',
+                    element:<Checkout></Checkout>
+                },
+                {
+                    path:'thank-you',
+                    element:<ThankYou></ThankYou>
                 }
            
             ]

@@ -3,15 +3,15 @@ import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div className="w-64 h-screen bg-gray-800 text-white">
-      <div className="p-4 text-2xl font-bold">Admin Dashboard</div>
-      <nav className="mt-10">
+    <div className="w-64 h-screen bg-green-800 text-white flex flex-col">
+      <div className="p-6 text-3xl font-bold text-center">🌿 Plant Shop Admin</div>
+      <nav className="mt-8 flex flex-col space-y-2">
         <NavLink
           to="/dashboard"
           className={({ isActive }) =>
             isActive
-              ? "block py-2.5 px-4 bg-gray-700"
-              : "block py-2.5 px-4 hover:bg-gray-700"
+              ? "bg-green-700 text-white py-3 px-6 rounded-lg"
+              : "py-3 px-6 rounded-lg hover:bg-green-600 transition"
           }
         >
           Dashboard
@@ -20,18 +20,18 @@ const Sidebar = () => {
           to="/products"
           className={({ isActive }) =>
             isActive
-              ? "block py-2.5 px-4 bg-gray-700"
-              : "block py-2.5 px-4 hover:bg-gray-700"
+              ? "bg-green-700 text-white py-3 px-6 rounded-lg"
+              : "py-3 px-6 rounded-lg hover:bg-green-600 transition"
           }
         >
-          Products
+          ManageProducts
         </NavLink>
         <NavLink
           to="/users"
           className={({ isActive }) =>
             isActive
-              ? "block py-2.5 px-4 bg-gray-700"
-              : "block py-2.5 px-4 hover:bg-gray-700"
+              ? "bg-green-700 text-white py-3 px-6 rounded-lg"
+              : "py-3 px-6 rounded-lg hover:bg-green-600 transition"
           }
         >
           Users
@@ -40,8 +40,8 @@ const Sidebar = () => {
           to="/orders"
           className={({ isActive }) =>
             isActive
-              ? "block py-2.5 px-4 bg-gray-700"
-              : "block py-2.5 px-4 hover:bg-gray-700"
+              ? "bg-green-700 text-white py-3 px-6 rounded-lg"
+              : "py-3 px-6 rounded-lg hover:bg-green-600 transition"
           }
         >
           Orders
@@ -50,8 +50,8 @@ const Sidebar = () => {
           to="/sales-summary"
           className={({ isActive }) =>
             isActive
-              ? "block py-2.5 px-4 bg-gray-700"
-              : "block py-2.5 px-4 hover:bg-gray-700"
+              ? "bg-green-700 text-white py-3 px-6 rounded-lg"
+              : "py-3 px-6 rounded-lg hover:bg-green-600 transition"
           }
         >
           Sales Summary

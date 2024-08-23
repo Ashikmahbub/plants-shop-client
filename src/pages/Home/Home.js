@@ -1,36 +1,35 @@
- 
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Banner from "../Banner/Banner";
+import Bonsai from "../Categories/Bonsai";
+import Flower from "../Categories/Flower";
 import Indoor from "../Categories/Indoors";
+import Outdoor from "../Categories/Outdoor";
+import Packages from "../Categories/Packages";
 import SemiIndoor from "../Categories/Semi-Indoors";
- 
 
 const Home = () => {
-   
-  
-
   return (
     <div>
-       <Banner></Banner>
-       <Indoor></Indoor>
-       <SemiIndoor></SemiIndoor>
+      <Banner />
+      <div className="text-center mt-10">
+        <Link
+          to="/shop"
+          className="bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300"
+        >
+          Shop Now
+        </Link>
+      </div>
+      <Indoor />
+      <SemiIndoor />
+      <Flower />
+      <Bonsai />
+      <Outdoor />
+      <Packages />
 
-
-    </div>
-   
+      {/* Shop Now Button */}
     
-    // <div className="min-h-screen flex items-center justify-center bg-gray-100">
-    //   <div className="text-center">
-    //     <h1 className="text-4xl font-bold text-green-600">
-    //       Welcome to the Plant Shop
-    //     </h1>
-    //     <p className="mt-4 text-lg text-gray-700">
-    //       Explore a wide variety of indoor and outdoor plants.
-    //     </p>
-    //     <button className="mt-6 px-6 py-3 bg-green-500 text-white rounded hover:bg-green-700">
-    //       Shop Now
-    //     </button>
-    //   </div>
-    // </div>
+    </div>
   );
 };
 

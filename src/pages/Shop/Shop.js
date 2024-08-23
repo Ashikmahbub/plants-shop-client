@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { getProducts } from '../../api'; // Assuming you have an API file like this
+import { Link } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 
 const Shop = () => {
+  const { addToCart} = useCart();
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [sortOption, setSortOption] = useState('priceAsc');
 
   useEffect(() => {
     // Fetch products when the component loads
@@ -10,6 +16,10 @@ const Shop = () => {
       try {
         const data = await getProducts();
         setProducts(data);
+        
+        // Extract categories from the products
+        const allCategories = [...new Set(data.map(product => product.category))];
+        setCategories(allCategories);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -18,12 +28,79 @@ const Shop = () => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    // Sort and filter products when sortOption or selectedCategories changes
+    const fetchProducts = async () => {
+      try {
+        const data = await getProducts();
+        let filteredProducts = data;
+
+        if (selectedCategories.length > 0) {
+          filteredProducts = data.filter(product => selectedCategories.includes(product.category));
+        }
+
+        if (sortOption === 'priceAsc') {
+          filteredProducts.sort((a, b) => a.price - b.price);
+        } else if (sortOption === 'priceDesc') {
+          filteredProducts.sort((a, b) => b.price - a.price);
+        }
+
+        setProducts(filteredProducts);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, [selectedCategories, sortOption]);
+
   return (
     <div className="container mx-auto px-4 py-6">
       <h2 className="text-3xl font-bold text-green-700 mb-6">Shop Our Plants</h2>
 
-      {/* Filters Section */}
-      <div className="mb-4">
+      {/* Category Buttons */}
+      <div className="mb-4 flex flex-wrap gap-2">
+        {['Indoor', 'Semi-indoor', 'Bonsai', 'Office Friendly', 'Flower', 'Outdoor', 'Fruits'].map((category) => (
+          <Link to={`/${category.toLowerCase().replace(/ /g, '-')}`} key={category}>
+            <button className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition duration-300">
+              {category}
+            </button>
+          </Link>
+        ))}
+      </div>
+
+      {/* Filters and Sorting */}
+      <div className="mb-6 flex flex-col md:flex-row gap-4 items-center">
+        <div className="flex flex-col md:flex-row gap-4">
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+            className="border border-gray-300 px-3 py-2 rounded"
+          >
+            <option value="priceAsc">Price: Low to High</option>
+            <option value="priceDesc">Price: High to Low</option>
+          </select>
+
+          <div className="flex gap-2 flex-wrap">
+            {categories.map((category) => (
+              <label key={category} className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  value={category}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setSelectedCategories((prev) =>
+                      e.target.checked ? [...prev, value] : prev.filter((c) => c !== value)
+                    );
+                  }}
+                  className="form-checkbox"
+                />
+                <span className="ml-2">{category}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
         <input
           type="text"
           placeholder="Search plants..."
@@ -39,14 +116,16 @@ const Shop = () => {
             className="border border-gray-200 rounded-lg overflow-hidden shadow-sm"
           >
             <img
-              src={product.imageUrl}
+              src={`http://localhost:5000${product.imageUrl}`}
               alt={product.name}
-              className="w-full h-48 object-cover"
+              className="w-full h-80 object-cover"
             />
             <div className="p-4">
-              <h3 className="text-lg font-semibold text-green-800">{product.name}</h3>
+              <h3 className="text-lg font-semibold text-green-800">{product.title}</h3>
               <p className="text-gray-700 mt-2">${product.price}</p>
-              <button className="bg-green-700 text-white px-4 py-2 rounded mt-4 hover:bg-green-800 transition duration-300">
+              <button
+               onClick={() => addToCart(product)}
+               className="bg-green-700 text-white px-4 py-2 rounded mt-4 hover:bg-green-800 transition duration-300">
                 Add to Cart
               </button>
             </div>

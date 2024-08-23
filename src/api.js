@@ -26,17 +26,19 @@ export const getProductById = async (id) => {
 export const createProduct = async (productData) => {
   try {
     const response = await axios.post(`${API_URL}/products`, productData);
-    return response.data;
+    console.log('Product created:', response.data);
   } catch (error) {
     console.error('Error creating product:', error);
-    throw error;
   }
 };
 
 export const updateProduct = async (id, productData) => {
   try {
     const response = await axios.put(`${API_URL}/products/${id}`, productData);
+    
     return response.data;
+    
+    
   } catch (error) {
     console.error(`Error updating product with ID ${id}:`, error);
     throw error;
