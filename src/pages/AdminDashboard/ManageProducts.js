@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import AddProduct from './AddProduct'; // Import your AddProduct component
-
-const API_URL = 'http://localhost:5000/api/products';
+import AddProduct from './AddProduct';
+const API_URL = 'http://localhost:5000/api/';
 const rootUrl ='http://localhost:5000';
 
 const ManageProducts = () => {
@@ -16,8 +15,10 @@ const ManageProducts = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(`${API_URL}/admin/products`);
       setProducts(response.data);
+      console.log(response.data);
+      
     } catch (error) {
       console.error('Error fetching products:', error);
     }

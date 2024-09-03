@@ -1,34 +1,39 @@
 import React, { useState } from 'react';
 import { useCart } from '../../context/CartContext';
-import {   useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'; // Import toast for notifications
+import 'react-toastify/dist/ReactToastify.css'; // Import CSS for toast
 
 const Checkout = () => {
   const { cart, clearCart } = useCart();
-  const navigate = useNavigate(); // For navigation after order submission
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    address: '',
     phone: '',
+    address: '',
     city: '',
     country: '',
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleProceedToConfirm = () => {
+    // Navigate to the Order Summary page with form data
+    navigate('/order-summary', { state: { ...formData, cart } });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/orders', { ...formData, cart });
-      alert('Order placed successfully! Confirmation email sent.');
-      clearCart();
-      navigate('/thank-you');  
+      // Redirect to Order Summary page for review
+      handleProceedToConfirm();
     } catch (error) {
-      console.error('Error placing order:', error);
-      alert('Failed to place order.');
+      console.error('Error proceeding to confirm:', error);
+      toast.error('Failed to proceed to order summary.'); // Show error toast
     }
   };
 
@@ -79,8 +84,8 @@ const Checkout = () => {
             <label className="block text-gray-700 font-semibold mb-2">Address</label>
             <input
               type="text"
-              name="phone"
-              value={formData.phone}
+              name="address"
+              value={formData.address}
               onChange={handleChange}
               className="border border-gray-300 px-4 py-2 rounded w-full"
               required
@@ -114,12 +119,12 @@ const Checkout = () => {
           </div>
         </div>
 
-        {/* Submit Button */}
+        {/* Proceed to Confirm Button */}
         <button
           type="submit"
-          className="bg-green-700 text-white px-6 py-2 rounded hover:bg-green-800 transition duration-300 w-full md:w-auto"
+          className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition duration-300 w-full md:w-auto"
         >
-          Place Order
+          Proceed to Confirm
         </button>
       </form>
     </div>
