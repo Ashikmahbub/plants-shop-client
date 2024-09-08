@@ -13,6 +13,12 @@ import ManageProducts from "../pages/AdminDashboard/ManageProducts";
 import Cart from "../pages/Cart/Cart";
 import Checkout from "../pages/Checkout/Checkout";
 import ThankYou from "../pages/Thankyou/ThankYou";
+import OrderSummary from "../pages/OrderSummary/OrderSummary";
+ 
+import OrderEdit from "../pages/AdminDashboard/OrderEdit";
+import ManageOrders from "../pages/AdminDashboard/MangeOrders";
+import SemiIndoor from "../pages/Categories/Semi-Indoors";
+import SemiIndoorPlants from "../pages/Semi-Indoor/Semi-Indoor";
 
 export const router = createBrowserRouter(
     [
@@ -47,7 +53,7 @@ export const router = createBrowserRouter(
                     element:<Shop></Shop>
                 },
                 {
-                    path:'indoors',
+                    path:'Indoor',
                     element:<Indoor></Indoor>
                 },
                 {
@@ -63,8 +69,24 @@ export const router = createBrowserRouter(
                     element:<Checkout></Checkout>
                 },
                 {
-                    path:'thank-you',
-                    element:<ThankYou></ThankYou>
+                    path: 'thank-you/:orderId',
+                    element: <ThankYou />
+                },
+                {
+                    path:'order-summary',
+                    element:<OrderSummary></OrderSummary>
+                },
+                {
+                    path:'adminorders',
+                    element:<ManageOrders></ManageOrders>
+                },
+                {
+                    path:'/admin/orders/:orderId/edit',
+                    element:<OrderEdit></OrderEdit>
+                },
+                {
+                    path:'semi-indoor',
+                    element:<SemiIndoorPlants></SemiIndoorPlants>
                 }
            
             ]

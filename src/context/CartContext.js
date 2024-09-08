@@ -23,6 +23,7 @@ export const CartProvider = ({ children }) => {
         // Add the product as a new item in the cart
         return [...prevCart, { ...product, quantity: 1 }];
       }
+       
     });
   };
 

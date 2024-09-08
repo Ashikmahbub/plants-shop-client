@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:5000/api/';
+const IMG_URL = 'http://localhost:5000';
 
 const SemiIndoorPlants = () => {
   const [products, setProducts] = useState([]);
@@ -9,7 +10,7 @@ const SemiIndoorPlants = () => {
   useEffect(() => {
     const fetchPlants = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/products/semi-indoor`);
+        const response = await axios.get(`${API_URL}products/semi-indoor`);
         setProducts(response.data);
       } catch (error) {
         console.error('Failed to fetch indoor plants');
@@ -31,7 +32,7 @@ const SemiIndoorPlants = () => {
         {products.map((product) => (
           <div key={product._id} className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
-              src={`${API_URL}${product.imageUrl}`}
+              src={`${IMG_URL}${product.imageUrl}`}
               alt={product.title}
               className="w-full h-80 object-cover"
             />

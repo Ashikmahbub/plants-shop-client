@@ -1,7 +1,8 @@
 // src/pages/Cart/Cart.js
-import React from 'react';
-import { useCart } from '../../context/CartContext';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useCart } from "../../context/CartContext";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { cart, clearCart, updateItemQuantity } = useCart();
@@ -21,9 +22,15 @@ const Cart = () => {
   };
 
   const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+    return cart
+      .reduce((total, item) => total + item.price * item.quantity, 0)
+      .toFixed(2);
   };
+  const navigate = useNavigate();
 
+  const handleProceedToCheckout = () => {
+    navigate("/checkout");
+  };
   return (
     <div className="container mx-auto px-4 py-6">
       <h2 className="text-3xl font-bold text-green-700 mb-6">Your Cart</h2>
@@ -36,7 +43,11 @@ const Cart = () => {
               <li key={item._id} className="border-b border-gray-200 py-4">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center">
-                    <img src={`http://localhost:5000${item.imageUrl}`} alt={item.title} className="w-16 h-16 mr-4" />
+                    <img
+                      src={`http://localhost:5000${item.imageUrl}`}
+                      alt={item.title}
+                      className="w-16 h-16 mr-4"
+                    />
                     <span>{item.title}</span>
                   </div>
                   <div className="flex items-center">
@@ -66,11 +77,12 @@ const Cart = () => {
             >
               Clear Cart
             </button>
-            <Link to="/checkout">
-              <button className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition duration-300">
-                Checkout (${getTotalPrice()})
-              </button>
-            </Link>
+            <button
+              onClick={handleProceedToCheckout}
+              className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition duration-300"
+            >
+              Proceed to Checkout
+            </button>
           </div>
         </div>
       )}

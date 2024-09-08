@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useCart } from '../../context/CartContext';
 
 const API_URL = 'http://localhost:5000';
 
 const IndoorPlants = () => {
   const [products, setProducts] = useState([]);
+  const {addToCart} =useCart()
 
   useEffect(() => {
     const fetchIndoorPlants = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/products/indoor`);
+        const response = await axios.get(`${API_URL}/api/products/Indoor`);
         setProducts(response.data);
       } catch (error) {
         console.error('Failed to fetch indoor plants');
@@ -19,10 +21,7 @@ const IndoorPlants = () => {
     fetchIndoorPlants();
   }, []);
 
-  const handleAddToCart = (product) => {
-    // Implement your add-to-cart functionality here
-    console.log('Adding to cart:', product);
-  };
+ 
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -40,7 +39,7 @@ const IndoorPlants = () => {
               <p className="text-gray-600 mb-2">Weight: {product.weight} grams</p>
               <p className="text-gray-600 mb-4">Price: ${product.price}</p>
               <button
-                onClick={() => handleAddToCart(product)}
+                onClick={() => addToCart(product)}
                 className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300"
               >
                 Add to Cart

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { getProducts } from '../../api'; // Assuming you have an API file like this
+import { getProducts } from '../../api';  
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Shop = () => {
-  const { addToCart} = useCart();
+  const { addToCart} = useCart(); 
+ 
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -123,15 +126,32 @@ const Shop = () => {
             <div className="p-4">
               <h3 className="text-lg font-semibold text-green-800">{product.title}</h3>
               <p className="text-gray-700 mt-2">${product.price}</p>
-              <button
-               onClick={() => addToCart(product)}
+            <button
+               onClick={() => {
+                addToCart(product);
+                toast.success(`${product.title} has been added to the cart!`, {
+                  position: "top-right",
+                  autoClose: 3000, // Automatically close after 3 seconds
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+              }}
+              
+               
+    
+               
                className="bg-green-700 text-white px-4 py-2 rounded mt-4 hover:bg-green-800 transition duration-300">
                 Add to Cart
+                
               </button>
             </div>
           </div>
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 };

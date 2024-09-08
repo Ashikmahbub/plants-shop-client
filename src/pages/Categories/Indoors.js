@@ -20,7 +20,7 @@ const SemiIndoor = () => {
         subHeading={"Make Your Home a Green Haven"}
         heading={"Plants For Indoors"}
       />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6" onClick={()=>handleCategories('indoors')}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6" onClick={()=>handleCategories('Indoor')}>
         <div className="group relative cursor-pointer overflow-hidden rounded-lg shadow-lg transition-transform transform hover:scale-105">
           <img
             src={slide1}

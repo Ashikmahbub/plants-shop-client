@@ -27,6 +27,16 @@ const Sidebar = () => {
           ManageProducts
         </NavLink>
         <NavLink
+          to="/adminorders"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-green-700 text-white py-3 px-6 rounded-lg"
+              : "py-3 px-6 rounded-lg hover:bg-green-600 transition"
+          }
+        >
+          ManageOrders
+        </NavLink>
+        <NavLink
           to="/users"
           className={({ isActive }) =>
             isActive
