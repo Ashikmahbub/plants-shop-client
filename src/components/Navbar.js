@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaSearch, FaShoppingCart, FaUserCircle } from 'react-icons/fa';
-import { useCart } from '../context/CartContext';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaSearch, FaShoppingCart } from 'react-icons/fa';
+import { useCart } from '../context/CartContext'; // Assuming you have a useCart hook
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
   const { cart } = useCart();
+  const { user, userSignOut } = useContext(AuthContext); // Getting user and logout from AuthContext
+  const navigate = useNavigate();
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleToggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  const handleLogOut =()=>{
+    return userSignOut();
+  }
 
   return (
     <nav className="bg-white shadow-md">
@@ -62,25 +68,9 @@ const Navbar = () => {
               Contact
             </Link>
           </li>
-          {/* Mobile Menu Items */}
-          <li className="md:hidden">
-            <Link to="/cart" className="flex items-center text-green-700 hover:text-green-900 transition duration-300">
-              <FaShoppingCart size={24} />
-              {cartItemCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartItemCount}
-                </span>
-              )}
-            </Link>
-          </li>
-          <li className="md:hidden">
-            <Link to="/profile" className="text-green-700 hover:text-green-900 transition duration-300">
-              <FaUserCircle size={24} />
-            </Link>
-          </li>
         </ul>
 
-        {/* Desktop Icons */}
+        {/* Profile Section */}
         <div className="flex items-center space-x-4">
           <Link to="/cart" className="relative text-green-700 hover:text-green-900 transition duration-300 hidden md:flex items-center">
             <FaShoppingCart size={24} />
@@ -91,62 +81,40 @@ const Navbar = () => {
             )}
           </Link>
 
-          <Link to="/profile" className="text-green-700 hover:text-green-900 transition duration-300 hidden md:flex">
-            <FaUserCircle size={24} />
-          </Link>
-
-          <Link to="/dashboard" className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition duration-300 hidden md:block">
-            Admin
-          </Link>
-
-          <Link to="/cart" className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition duration-300 hidden md:block">
-            Go to Cart
-          </Link>
+          {/* Check if user exists */}
+          {user ? (
+            <div className="flex items-center space-x-3">
+              <img
+                src={user.photoURL || '/default-avatar.png'} // Use Firebase user photoURL, fallback to default
+                alt="Profile"
+                className="w-8 h-8 rounded-full"
+              />
+              <span className="text-green-700">{user.displayName || 'Anonymous'}</span> {/* Use Firebase displayName */}
+              <button
+                onClick={handleLogOut}
+                className="bg-green-700 text-white px-3 py-2 rounded hover:bg-green-800 transition duration-300"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-3">
+              <Link
+                to="/login"
+                className="bg-green-700 text-white px-3 py-2 rounded hover:bg-green-800 transition duration-300"
+              >
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                className="bg-white text-green-700 px-3 py-2 rounded border border-green-700 hover:bg-green-700 hover:text-white transition duration-300"
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg py-4">
-          <ul className="flex flex-col space-y-4 px-4">
-            <li>
-              <Link to="/" className="block py-2 text-green-700 hover:text-green-900 transition duration-300">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/shop" className="block py-2 text-green-700 hover:text-green-900 transition duration-300">
-                Shop
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className="block py-2 text-green-700 hover:text-green-900 transition duration-300">
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="block py-2 text-green-700 hover:text-green-900 transition duration-300">
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link to="/cart" className="flex items-center text-green-700 hover:text-green-900 transition duration-300">
-                <FaShoppingCart size={24} />
-                {cartItemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartItemCount}
-                  </span>
-                )}
-              </Link>
-            </li>
-            <li>
-              <Link to="/profile" className="text-green-700 hover:text-green-900 transition duration-300">
-                <FaUserCircle size={24} />
-              </Link>
-            </li>
-          </ul>
-        </div>
-      )}
     </nav>
   );
 };

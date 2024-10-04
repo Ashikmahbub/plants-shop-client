@@ -7,15 +7,23 @@ import "./index.css";
 
 import reportWebVitals from "./reportWebVitals";
 import { CartProvider } from "./context/CartContext";
+import AuthProvider, { AuthContext } from "./context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <CartProvider>
-      <div className="max-w-screen-xl mx-auto bg-white">
-        <RouterProvider router={router} />
-      </div>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+      
+          <div className="max-w-screen-xl mx-auto bg-white">
+            <RouterProvider router={router} />
+          </div>
+
+     
+     
+      </CartProvider>
+    </AuthProvider>
+ 
   </React.StrictMode>
 );
 

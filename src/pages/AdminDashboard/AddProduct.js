@@ -97,8 +97,9 @@ const AddProduct = () => {
               onChange={(e) => setCategory(e.target.value)}
               className="select select-bordered w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
             >
-              <option value="Indoor">Indoor</option>
+              <option value="indoor">Indoor</option>
               <option value="semi-indoor">Semi-Indoor</option>
+              <option value="office-friendly">Office-Friendly</option>
               <option value="bonsai">Bonsai</option>
               <option value="outdoor">Outdoor</option>
               <option value="succulents">Succulents</option>

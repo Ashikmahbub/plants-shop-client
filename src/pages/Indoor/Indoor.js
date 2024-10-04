@@ -1,27 +1,34 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCart } from '../../context/CartContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const API_URL = 'http://localhost:5000';
 
-const IndoorPlants = () => {
+const API_URL = 'http://localhost:5000/api/';
+const IMG_URL = 'http://localhost:5000';
+
+const Indoor = () => {
+  const { addToCart} = useCart(); 
   const [products, setProducts] = useState([]);
-  const {addToCart} =useCart()
 
   useEffect(() => {
-    const fetchIndoorPlants = async () => {
+    const fetchPlants = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/products/Indoor`);
+        const response = await axios.get(`${API_URL}products/indoor`);
         setProducts(response.data);
       } catch (error) {
         console.error('Failed to fetch indoor plants');
       }
     };
 
-    fetchIndoorPlants();
+    fetchPlants();
   }, []);
 
- 
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    console.log('Adding to cart:', product);
+  };
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -30,7 +37,7 @@ const IndoorPlants = () => {
         {products.map((product) => (
           <div key={product._id} className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
-              src={`${API_URL}${product.imageUrl}`}
+              src={`${IMG_URL}${product.imageUrl}`}
               alt={product.title}
               className="w-full h-80 object-cover"
             />
@@ -39,17 +46,33 @@ const IndoorPlants = () => {
               <p className="text-gray-600 mb-2">Weight: {product.weight} grams</p>
               <p className="text-gray-600 mb-4">Price: ${product.price}</p>
               <button
-                onClick={() => addToCart(product)}
-                className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300"
-              >
+               onClick={() => {
+                addToCart(product);
+                toast.success(`${product.title} has been added to the cart!`, {
+                  position: "top-right",
+                  autoClose: 2000, // Automatically close after 3 seconds
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+              }}
+              
+               
+    
+               
+               className="bg-green-700 text-white px-4 py-2 rounded mt-4 hover:bg-green-800 transition duration-300">
                 Add to Cart
+                
               </button>
             </div>
           </div>
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 };
 
-export default IndoorPlants;
+export default Indoor;
