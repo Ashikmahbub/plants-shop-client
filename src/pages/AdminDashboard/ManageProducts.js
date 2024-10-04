@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import AddProduct from './AddProduct'; // Import your AddProduct component
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AddProduct from './AddProduct';
 
-const API_URL = 'http://localhost:5000/api/products';
-const rootUrl ='http://localhost:5000';
+const API_URL = 'http://localhost:5000/api/';
+const rootUrl = 'http://localhost:5000';
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
@@ -18,8 +20,6 @@ const ManageProducts = () => {
     try {
       const response = await axios.get(`${API_URL}/admin/products`);
       setProducts(response.data);
-      console.log(response.data);
-      
     } catch (error) {
       console.error('Error fetching products:', error);
       toast.error('Failed to load products');
