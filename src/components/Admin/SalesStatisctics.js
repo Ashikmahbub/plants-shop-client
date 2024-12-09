@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const API_URL = 'http://localhost:5000/api/admin/sales-statistics';
+const API_URL = 'https://plants-shop-server-rho.vercel.app/api/admin/sales-statistics';
 
 const initialData = {
   daily: [

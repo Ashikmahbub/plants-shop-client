@@ -119,7 +119,7 @@ const Shop = () => {
             className="border border-gray-200 rounded-lg overflow-hidden shadow-sm"
           >
             <img
-              src={`http://localhost:5000${product.imageUrl}`}
+              src={`https://plants-shop-server-rho.vercel.app/${product.imageUrl}`}
               alt={product.name}
               className="w-full h-80 object-cover"
             />

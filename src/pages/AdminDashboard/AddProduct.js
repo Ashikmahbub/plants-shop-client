@@ -4,7 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaWeightHanging, FaDollarSign, FaTag, FaBoxOpen, FaImage } from 'react-icons/fa';  // Import icons from FontAwesome
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://plants-shop-server-rho.vercel.app/api';
 
 const AddProduct = () => {
   const [title, setTitle] = useState('');

@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const API_URL = "http://localhost:5000/api/";
+const API_URL = "https://plants-shop-server-rho.vercel.app/api/";
 const SHIPPING_CHARGE = 10.0; // Flat shipping charge
 
 const OrderSummary = () => {
