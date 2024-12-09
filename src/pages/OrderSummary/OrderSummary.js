@@ -73,7 +73,7 @@ const OrderSummary = () => {
             <li key={item._id} className="py-4 flex justify-between items-center">
               <div className="flex items-center">
                 <img
-                  src={`http://localhost:5000${item.imageUrl}`}
+                  src={`https://plants-shop-server-rho.vercel.app${item.imageUrl}`}
                   alt={item.title}
                   className="w-16 h-16 object-cover rounded-lg shadow-md mr-4"
                 />
